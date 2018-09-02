@@ -43,7 +43,7 @@ var highBidder = initialBidder;
 
 // Enter inputs into Firebase
 //! 07-firebase\01-Activities\13-mostrecentuser\Solved\recentuser-solved.html
-$("#checkEmailPass").on("click", function(event) {
+$("#checkEmailPass").on("click", function (event) {
   event.preventDefault();
   var userEmail = $("#userEmail").val().trim();
   var passwords = $("#userPassword").val().trim();
@@ -52,7 +52,7 @@ $("#checkEmailPass").on("click", function(event) {
     passwords: passwords
   });
 });
-$("#newEmailPassLoca").on("click", function(event) {
+$("#newEmailPassLoca").on("click", function (event) {
   event.preventDefault();
   var userEmail = $("#newUserEmail").val().trim();
   var passwords = $("#newUserPassword").val().trim();
@@ -63,3 +63,43 @@ $("#newEmailPassLoca").on("click", function(event) {
     location: location
   });
 });
+var googlekey = "AIzaSyDdm7-qIzpaPhrsOXVe3YLVnQzvT-hpUGI"
+
+var map, infoWindow, marker;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 33.6449531, lng: -117.8369658},
+    zoom: 14
+  });
+  infoWindow = new google.maps.InfoWindow;
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      infoWindow.open(map);
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+  infoWindow.open(map);
+};
+
+// 
+initMap();
+handleLocationError();
