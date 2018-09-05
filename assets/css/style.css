@@ -15,8 +15,40 @@
         width: 900px;
     }
 }
+/* CSS FOR INDEX PAGE */
 
-.jumbotron {
-    background-color: aqua;
+p {
+    color: black;
 }
-/* hello comment line */
+.row {
+    margin-top: 40px;
+    padding: 10px;
+}
+
+/* CSS FOR LOGIN PAGE */
+
+.h1-login {
+    text-align: center;
+    font-size: 40px;
+}
+
+.login-body {
+    padding: 100px;
+    background-color: #20315A;
+}
+
+.row-login {
+    background-color: white;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 40px;
+    padding: 70px;
+    border-radius: 25px;
+}
+
+.waves-effect {
+    font-size: 30px;
+    margin-left: 45%;
+    background-color: teal;
+ 
+}
