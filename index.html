@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
 
@@ -16,6 +15,29 @@
 <body>
     <div class='container'>
         <h1 class='center-align'><img src='Assets/images/taco couple2.png' alt='' class='responsive-img' style='height:100px'/>Let's Taco 'Bout It</h1>
+
+    <!-- ----------------------------------------------------------------------------------------- -->
+    <!-- HEADER CONTENT WILL BE LOCATED HERE -->
+    <!-- BANNER CONTENT WILL BE LOCATED HERE -->
+    <div class="jumbotron" style="background-color: #20315A ; color: white;">
+        <div class="row">
+            <!-- NEW USERE INPUT WILL BE LOCATED HERE -->
+            <form class="row-2">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">New Email address</label>
+                    <input type="email" class="form-control" id="newUserEmail" aria-describedby="emailHelp" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">New Password</label>
+                    <input type="password" class="form-control" id="newUserPassword" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">New User Location (street, city, state)</label>
+                    <input type="email" class="form-control" id="newUserLoca" aria-describedby="emailHelp" placeholder="Address">
+                </div>
+                <button type="submit" id="newEmailPassLoca" class="btn btn-primary">Submit</button>
+            </form>
+
 
         <nav>
             <div class='nav-wrapper yellow'>
@@ -31,16 +53,9 @@
     <!-- SITE CONTENT WILL BE LOCATED HERE -->
     <!-- TOP FEED CONTENT WILL BE LOCATED HERE -->
     <div class="row">
-        <div class="col-xl-2">
+        <div class="col-xl-2" id="feedArea">
             Top Feed
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. At, voluptatibus doloremque ut officiis totam
-            amet dolorem corporis modi temporibus, accusamus inventore facere tenetur ipsum voluptas minima nulla
-            libero repudiandae porro.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius pariatur cumque eligendi omnis veniam nihil
-            iusto consectetur quaerat? Assumenda possimus voluptate sint non natus nulla, porro sed omnis earum odit!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, corrupti obcaecati amet nostrum velit
-            soluta sit natus numquam quaerat quo. Tenetur ipsa aspernatur, vero esse corrupti tempora iste earum
-            voluptatum?
+            
         </div>
 
         <!-- MAIN CONTENT WILL BE LOCATED HERE -->
@@ -50,7 +65,7 @@
 
         <!-- LIVE CHAT AND MAP CONTENT WILL BE LOCATED HERE -->
         <div class="col-xl-2">
-            <div class="row">live chat area</div>
+            <div class="row" id="chatArea">live chat area</div>
 
         </div>
     </div>
@@ -59,6 +74,7 @@
     <!-- ----------------------------------------------------------------------------------------- -->
     <!-- THIS IS WHERE SCRIPT LINKS WILL BE LOCATED -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
