@@ -44,6 +44,14 @@ p {
     padding: 10px;
 }
 
+#feedArea {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+#chatArea {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
 /* CSS FOR SIGN UP PAGE */
 
 .h1-login {
