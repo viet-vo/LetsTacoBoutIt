@@ -1,4 +1,16 @@
 
+// updated variables and values to match ids in html
+$("#newEmailPassLoca").on("click", function () {
+  var newUserEmail = $("#newUserEmail").val().trim();
+  var newPassword = $("#newUserPassword").val().trim();
+  var newAddress = $("#newUserLoca").val().trim();
+  console.log(newUserEmail);
+  console.log(newPassword);
+  console.log(newAddress);
+});
+
+
+
 // Firebase Database
 //! ScriptKitty'd from activity 07-firebase\01-Activities\16-codersbay-viewtracker\Solved\logic.js
 var config = {
@@ -35,13 +47,16 @@ $("#checkEmailPass").on("click", function (event) {
   event.preventDefault();
   var userEmail = $("#userEmail").val().trim();
   var passwords = $("#userPassword").val().trim();
-  database.ref().set({
+
+// used the push method instead of set to store information on firebase
+  database.ref().push({
     userEmail: userEmail,
     passwords: passwords
   });
 });
 $("#newEmailPassLoca").on("click", function (event) {
   event.preventDefault();
+
   var userEmail = $("#newUserEmail").val().trim();
   var passwords = $("#newUserPassword").val().trim();
   var location = $("#newUserLoca").val().trim();
