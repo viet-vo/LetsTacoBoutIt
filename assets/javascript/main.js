@@ -39,18 +39,23 @@ $("#newEmailPassLoca").on("click", function (event) {
 
   // Adds the New Set of Inputs Into Firebase
   database.ref().push(newEntry)
+
   // Clears the Input Text Field
   $("#newUserEmail").val("");
   $("#newUserPassword").val("");
   $("#newUserLoca").val("");
 });
 
+// Google Geocode API that Translates Rough Addresses into Well-Formatted Addresses
+// and Latitude and Longitude to use with Google Maps
 function geocode() {
   database.ref().on("child_added", function (childSnapshot) {
 
     var userEmail1 = childSnapshot.val().userEmail;
     var location1 = childSnapshot.val().location;
 
+    // Similar to Ajax, Axios Retrieves data from an API
+    // I Chose to Use Axios Instead because Ajax was not working for me
     axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: location1,
@@ -63,6 +68,7 @@ function geocode() {
         var formLat = response.data.results[0].geometry.location.lat;
         var formLng = response.data.results[0].geometry.location.lng;
 
+        // Create New Markers for Each Child_added and Changed Marker Icon
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(formLat, formLng),
           map: map,
@@ -70,6 +76,7 @@ function geocode() {
           icon: 'assets/images/tacoCouple4.png'
         });
 
+        // Sets Marker on the Map
         google.maps.event.addListener(marker, 'click', (function (marker) {
           infowindow.setContent(formAddress);
           infowindow.open(map, marker);
@@ -82,12 +89,17 @@ function geocode() {
   });
 }
 
+// Initializing the Map
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
+    
+    // Starting Position for Google Maps
     center: {
       lat: 33.6449531,
       lng: -117.8369658
     },
+
+    // Starting Zoom for Google Maps Window
     zoom: 14
   });
   infoWindow = new google.maps.InfoWindow;
@@ -98,6 +110,7 @@ function initMap() {
         lng: position.coords.longitude
       };
 
+      // Will be prompted to ask for user's location
       infoWindow.setPosition(pos);
       infoWindow.setContent("Find people to Taco 'Bout it around you.");
       infoWindow.open(map);
@@ -111,6 +124,7 @@ function initMap() {
   }
 }
 
+// Error Handler
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
@@ -119,9 +133,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 };
 
-// 
+// Main Execution
 geocode();
 initMap();
 handleLocationError();
 getKeys();
-console.log(database);
