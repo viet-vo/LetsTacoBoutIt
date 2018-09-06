@@ -1,4 +1,3 @@
-
 // updated variables and values to match ids in html
 $("#newEmailPassLoca").on("click", function () {
   var newUserEmail = $("#newUserEmail").val().trim();
@@ -48,33 +47,79 @@ $("#checkEmailPass").on("click", function (event) {
   var userEmail = $("#userEmail").val().trim();
   var passwords = $("#userPassword").val().trim();
 
-// used the push method instead of set to store information on firebase
+  // used the push method instead of set to store information on firebase
   database.ref().push({
     userEmail: userEmail,
     passwords: passwords
   });
 });
+
+
 $("#newEmailPassLoca").on("click", function (event) {
   event.preventDefault();
-
   var userEmail = $("#newUserEmail").val().trim();
   var passwords = $("#newUserPassword").val().trim();
   var location = $("#newUserLoca").val().trim();
-  database.ref().push({
+
+
+
+  var geoCodeURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + googleGeoCodeKey;
+
+  var newEntry = {
     userEmail: userEmail,
     passwords: passwords,
     location: location
-  });
+  };
+
+  database.ref().push(newEntry)
+
+  console.log(newEntry.userEmail);
+  console.log(newEntry.passwords);
+  console.log(newEntry.location);
+
+  $("#newUserEmail").val("");
+  $("#newUserPassword").val("");
+  $("#newUserLoca").val("");
 });
-function getKeys(database) {
-  console.log(database.val());
-  var users = database.val();
-  var keys = Object.keys(users);
-  console.log(keys);
-}
+
+
 var googleMapKey = "AIzaSyDdm7-qIzpaPhrsOXVe3YLVnQzvT-hpUGI";
 var googleGeoCodeKey = "AIzaSyBR8TnfvXloNv8HCiWjrKG6uzIuI9d_z1c";
 var exampleAddress = "18090 Culver Dr, Irvine, CA 92612";
+
+geocode();
+
+function geocode() {
+
+  database.ref().on("child_added", function (childSnapshot) {
+    var userEmail1 = childSnapshot.val().userEmail;
+    var location1 = childSnapshot.val().location;
+
+
+    var place = location1;
+    axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+        params: {
+          address: place,
+          key: 'AIzaSyBR8TnfvXloNv8HCiWjrKG6uzIuI9d_z1c'
+        }
+      })
+      .then(function (response) {
+        console.log(response.data.results[0].formatted_address);
+        console.log(response.data.results[0].geometry.location.lat);
+        console.log(response.data.results[0].geometry.location.lng);
+        console.log(userEmail1);
+        var newRow = $("<tr>").append(
+          $("<td>").text(userEmail1)
+        );
+        $("#chatArea").append(newRow);
+        console.log("added");
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  });
+}
+
 var locations = [
   ['Trilogy', 33.645139, -117.834831, 4],
   ['Middle-Earth', 33.644826, -117.837073, 5],
@@ -88,14 +133,18 @@ var locations = [
 
 
 var map, infoWindow, marker;
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 33.6449531, lng: -117.8369658},
+    center: {
+      lat: 33.6449531,
+      lng: -117.8369658
+    },
     zoom: 14
   });
   infoWindow = new google.maps.InfoWindow;
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -105,35 +154,36 @@ function initMap() {
       infoWindow.setContent("Find people to Taco 'Bout it around you.");
       infoWindow.open(map);
       map.setCenter(pos);
-    }, function() {
+    }, function () {
       handleLocationError(true, infoWindow, map.getCenter());
     });
   } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
-  
+
   var marker, i;
 
-    for (i = 0; i < locations.length; i++) { 
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map
-      });
+  for (i = 0; i < locations.length; i++) {
+    marker = new google.maps.Marker({
+      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+      map: map
+    });
 
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
+    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+      return function () {
+        infowindow.setContent(locations[i][0]);
+        infowindow.open(map, marker);
+      }
+    })(marker, i));
+  }
 }
+
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
+    'Error: The Geolocation service failed.' :
+    'Error: Your browser doesn\'t support geolocation.');
   infoWindow.open(map);
 };
 

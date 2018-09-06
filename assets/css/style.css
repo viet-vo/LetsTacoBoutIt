@@ -16,7 +16,9 @@
     }
 }
 /* CSS FOR INDEX PAGE */
-
+#map {
+    color: black;
+}
 p {
     color: black;
 }
