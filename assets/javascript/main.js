@@ -40,10 +40,9 @@ $("#newEmailPassLoca").on("click", function (event) {
   // Adds the New Set of Inputs Into Firebase
   database.ref().push(newEntry)
 
-  // Clears the Input Text Field
-  $("#newUserEmail").val("");
-  $("#newUserPassword").val("");
-  $("#newUserLoca").val("");
+  // Takes you to Maps Page
+  window.location.replace("index.html");
+
 });
 
 // Google Geocode API that Translates Rough Addresses into Well-Formatted Addresses
