@@ -87,11 +87,21 @@ var googleMapKey = "AIzaSyDdm7-qIzpaPhrsOXVe3YLVnQzvT-hpUGI";
 var googleGeoCodeKey = "AIzaSyBR8TnfvXloNv8HCiWjrKG6uzIuI9d_z1c";
 var exampleAddress = "18090 Culver Dr, Irvine, CA 92612";
 
+var arr1 = [];
+var arr2 = [];
+var arr3 = [];
+var string1 = "";
+var string1 = "";
+var string3 = "";
+
+
 geocode();
 
-function geocode() {
 
+
+function geocode() {
   database.ref().on("child_added", function (childSnapshot) {
+
     var userEmail1 = childSnapshot.val().userEmail;
     var location1 = childSnapshot.val().location;
 
@@ -112,6 +122,10 @@ function geocode() {
           $("<td>").text(userEmail1)
         );
         $("#chatArea").append(newRow);
+        var newRow = $("<tr>").append(
+          $("<td>").text(location1)
+        );
+        $("#feedArea").append(newRow);
         console.log("added");
       })
       .catch(function (error) {
