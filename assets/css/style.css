@@ -20,6 +20,22 @@
     color: black;
     height: 50rem;
 }
+.container {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+#h1dance {
+    animation: dance 0.5s infinite;
+}
+@keyframes dance {
+25% {
+transform:rotate(5deg) translate(1px,2px);
+color: orange;
+}
+100% {
+transform:rotate(0deg);
+}    
+}
+
 p {
     color: black;
 }
@@ -28,16 +44,11 @@ p {
     padding: 10px;
 }
 
-/* CSS FOR LOGIN PAGE */
+/* CSS FOR SIGN UP PAGE */
 
 .h1-login {
     text-align: center;
-    font-size: 40px;
-}
-
-.login-body {
-    padding: 100px;
-    background-color: #20315A;
+    font-size: 50px;
 }
 
 .row-login {
@@ -47,11 +58,19 @@ p {
     margin-top: 40px;
     padding: 70px;
     border-radius: 25px;
+    font-family: 'Gloria Hallelujah', cursive;
 }
 
 .waves-effect {
     font-size: 30px;
     margin-left: 45%;
-    background-color: teal;
- 
+    border-radius: 25px;
+    height: 50px;
+    width: 140px;
+    padding: 10px;
+}
+
+#tacoDance {
+    animation: dance 0.5s infinite;
+    margin-top: 25px;   
 }
