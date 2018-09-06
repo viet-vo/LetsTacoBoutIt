@@ -1,15 +1,3 @@
-// updated variables and values to match ids in html
-$("#newEmailPassLoca").on("click", function () {
-  var newUserEmail = $("#newUserEmail").val().trim();
-  var newPassword = $("#newUserPassword").val().trim();
-  var newAddress = $("#newUserLoca").val().trim();
-  console.log(newUserEmail);
-  console.log(newPassword);
-  console.log(newAddress);
-});
-
-
-
 // Firebase Database
 //! ScriptKitty'd from activity 07-firebase\01-Activities\16-codersbay-viewtracker\Solved\logic.js
 var config = {
@@ -34,11 +22,6 @@ connectedRef.on("value", function (snap) {
 connectionsRef.on("value", function (snap) {
   $("#connected-viewers").text(snap.numChildren());
 });
-
-var initialBid = 0;
-var initialBidder = "No one :-(";
-var highPrice = initialBid;
-var highBidder = initialBidder;
 
 // Enter inputs into Firebase
 //! 07-firebase\01-Activities\13-mostrecentuser\Solved\recentuser-solved.html
@@ -206,3 +189,63 @@ initMap();
 handleLocationError();
 getKeys();
 console.log(database);
+
+var config = {
+  apiKey: "AIzaSyB4Ooeb3AO3GUZ0PlheNtyy2jhedAaIuIQ",
+  authDomain: "firstproject-vqv.firebaseapp.com",
+  databaseURL: "https://firstproject-vqv.firebaseio.com",
+  projectId: "firstproject-vqv",
+  storageBucket: "firstproject-vqv.appspot.com",
+  messagingSenderId: "578400054546"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
+var connectionsRef = database.ref("/connections");
+var connectedRef = database.ref(".info/connected");
+var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=delis&location=boston";
+$.ajax({
+url: queryURL,
+headers: {
+  'Authorization':'Bearer GyfJWsQft0GaFw1cD1iTZYZYSt_-CKPwuChKa5PNlyG5GaTcrq1t6PIhl5pxTr-b4Ic8mg3grBq97lC6LIv9M8j3BtFF-zkRWdB7M9DlF_sxQ_dXu3q0bAKULimIW3Yx',
+},
+method: 'GET',
+success: function(response){
+  // Grab the results from the API JSON return
+  var totalresults = response.total;
+
+  if (totalresults > 0){
+      
+      // Itirate through the JSON array of 'businesses' which was returned by the API
+      $.each(response.businesses, function(i, item) {
+          // Store each business's object in a variable
+          var id = item.id;
+          var phone = item.display_phone;
+          var image = item.image_url;
+          var name = item.name;
+          var rating = item.rating;
+          var reviewcount = item.review_count;
+          var address = item.location.address1;
+          var city = item.location.city;
+          var state = item.location.state;
+          var zipcode = item.location.zip_code;
+          var coordinate1 = item.coordinates.latitude;
+          var coordinate2 = item.coordinates.longitude;
+          // Append our result into our page
+          $('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b><br>Business ID: ' + id 
+          + '<br> Address: ' + address + ' ' + city + ', ' + state + ' ' + zipcode 
+          + '<br> Coordinates: ' + coordinate1 + ', ' + coordinate2
+          + '<br> Phone Number: ' + phone 
+          + '<br> Rating: ' + rating + ' with ' + reviewcount + ' reviews</div>');
+      });
+  } else {
+      // If our results are 0; no businesses were returned by the JSON therefore we display on the page no results were found
+      $('#results').append('<h5>We discovered no results!</h5>');
+  }
+  console.log(response);
+  database.ref().push({
+      coordinate1: coordinate1,
+      coordinate2: coordinate2
+      
+  });
+}
+}); 
