@@ -16,7 +16,10 @@
     }
 }
 /* CSS FOR INDEX PAGE */
-
+#map {
+    color: black;
+    height: 50rem;
+}
 p {
     color: black;
 }
