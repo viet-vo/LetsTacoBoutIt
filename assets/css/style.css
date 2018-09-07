@@ -150,14 +150,17 @@ p {
 }
 }
 
+/* Chat box*/
+
 .form {
-    padding: 10px;
-    border: 1px solid #000;
+    padding: 20px;
+    border: 3px solid orange;
     border-radius: 25px;
     margin-bottom: 10px;
     text-align: center;
     font-family: 'Gloria Halleluja', cursive;
-    background-color: #ffeb3b;
+    background-color:  #fffde7;
+    color: green;
 }
 .form input[type='text'], .form textarea, .form input[type='text'] {
     border:1px solid #000;

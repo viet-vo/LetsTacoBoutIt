@@ -23,9 +23,9 @@ var config = {
 
   $(".waves-effect").on("click", function (event) {
     event.preventDefault();
-    var newUserEmail = $("#newEmail").val().trim();
-    var newPasswords = $("#newPassword").val().trim();
-    var newLocation = $("#newLocation").val().trim();
+    var newUserEmail = $("#newUserEmail").val().trim();
+    var newPasswords = $("#newUserPassword").val().trim();
+    var newLocation = $("#newUserLoca").val().trim();
     window.location.replace("index.html");
   
   // used the push method instead of set to store information on firebase
