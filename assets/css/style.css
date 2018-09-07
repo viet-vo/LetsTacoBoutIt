@@ -82,3 +82,69 @@ p {
     animation: dance 0.5s infinite;
     margin-top: 25px;   
 }
+
+#connections {
+    margin: 20px;
+    font-family: 'Gloria Halleluja', cursive;
+    font-size: 22px;
+    color: darkgreen;
+    -webkit-animation:colorchange 20s infinite alternate;
+      
+      
+    }
+
+    @-webkit-keyframes colorchange {
+      0% {
+        
+        color: darkgreen;
+      }
+      
+      10% {
+        
+        color: purple;
+      }
+      
+      20% {
+        
+        color: #1abc9c;
+      }
+      
+      30% {
+        
+        color: #d35400;
+      }
+      
+      40% {
+        
+        color: blue;
+      }
+      
+      50% {
+        
+        color: orange;
+      }
+      
+      60% {
+        
+        color: yellowgreen;
+      }
+      
+      70% {
+        
+        color: red;
+      }
+      80% {
+     
+        color: brown;
+      }
+      
+      90% {
+     
+        color: aquamarine;
+      }
+      
+      100% {
+        
+        color: azure;
+}
+}

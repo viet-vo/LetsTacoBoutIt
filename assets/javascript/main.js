@@ -22,6 +22,7 @@ connectedRef.on("value", function (snap) {
 });
 connectionsRef.on("value", function (snap) {
   $("#connected-viewers").text(snap.numChildren());
+  $("#connections").text("Jalape\u00f1o Bizness: " + snap.numChildren() + " people ready to taco 'bout it!");
 });
 
 // Enter inputs into Firebase
@@ -44,7 +45,6 @@ $("#newEmailPassLoca").on("click", function (event) {
   window.location.replace("index.html");
 
 });
-
 // Google Geocode API that Translates Rough Addresses into Well-Formatted Addresses
 // and Latitude and Longitude to use with Google Maps
 function geocode() {
@@ -137,3 +137,55 @@ geocode();
 initMap();
 handleLocationError();
 getKeys();
+console.log(database);
+
+//------------------------------
+
+
+var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=delis&location=boston";
+$.ajax({
+url: queryURL,
+headers: {
+  'Authorization':'Bearer GyfJWsQft0GaFw1cD1iTZYZYSt_-CKPwuChKa5PNlyG5GaTcrq1t6PIhl5pxTr-b4Ic8mg3grBq97lC6LIv9M8j3BtFF-zkRWdB7M9DlF_sxQ_dXu3q0bAKULimIW3Yx',
+},
+method: 'GET',
+success: function(response){
+  // Grab the results from the API JSON return
+  var totalresults = response.total;
+
+  if (totalresults > 0){
+      
+      // Itirate through the JSON array of 'businesses' which was returned by the API
+      $.each(response.businesses, function(i, item) {
+          // Store each business's object in a variable
+          var id = item.id;
+          var phone = item.display_phone;
+          var image = item.image_url;
+          var name = item.name;
+          var rating = item.rating;
+          var reviewcount = item.review_count;
+          var address = item.location.address1;
+          var city = item.location.city;
+          var state = item.location.state;
+          var zipcode = item.location.zip_code;
+          var coordinate1 = item.coordinates.latitude;
+          var coordinate2 = item.coordinates.longitude;
+          // Append our result into our page
+          $('#results').append('<div id="' + id + '" style="margin-top:50px;margin-bottom:50px;"><img src="' + image + '" style="width:200px;height:150px;"><br>We found <b>' + name + '</b><br>Business ID: ' + id 
+          + '<br> Address: ' + address + ' ' + city + ', ' + state + ' ' + zipcode 
+          + '<br> Coordinates: ' + coordinate1 + ', ' + coordinate2
+          + '<br> Phone Number: ' + phone 
+          + '<br> Rating: ' + rating + ' with ' + reviewcount + ' reviews</div>');
+      });
+  } else {
+      // If our results are 0; no businesses were returned by the JSON therefore we display on the page no results were found
+      $('#results').append('<h5>We discovered no results!</h5>');
+  }
+  console.log(response);
+  database.ref().push({
+      coordinate1: coordinate1,
+      coordinate2: coordinate2
+      
+  });
+}
+}); 
