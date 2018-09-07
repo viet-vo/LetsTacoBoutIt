@@ -15,6 +15,7 @@
         width: 900px;
     }
 }
+
 /* CSS FOR INDEX PAGE */
 #map {
     color: black;
@@ -81,4 +82,129 @@ p {
 #tacoDance {
     animation: dance 0.5s infinite;
     margin-top: 25px;   
+}
+
+#connections {
+    margin: 20px;
+    font-family: 'Gloria Halleluja', cursive;
+    font-size: 22px;
+    color: darkgreen;
+    -webkit-animation:colorchange 20s infinite alternate;
+      
+      
+    }
+
+    @-webkit-keyframes colorchange {
+      0% {
+        
+        color: darkgreen;
+      }
+      
+      10% {
+        
+        color: purple;
+      }
+      
+      20% {
+        
+        color: #1abc9c;
+      }
+      
+      30% {
+        
+        color: #d35400;
+      }
+      
+      40% {
+        
+        color: blue;
+      }
+      
+      50% {
+        
+        color: orange;
+      }
+      
+      60% {
+        
+        color: yellowgreen;
+      }
+      
+      70% {
+        
+        color: red;
+      }
+      80% {
+     
+        color: brown;
+      }
+      
+      90% {
+     
+        color: aquamarine;
+      }
+      
+      100% {
+        
+        color: azure;
+}
+}
+
+/* Chat box*/
+
+.form {
+    padding: 20px;
+    border: 3px solid orange;
+    border-radius: 25px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: 'Gloria Halleluja', cursive;
+    background-color:  #fffde7;
+    color: green;
+}
+.form input[type='text'], .form textarea, .form input[type='text'] {
+    border:1px solid #000;
+    padding: 2px;
+    width:300px;
+    font-family: 'Gloria Halleluja', cursive;
+}
+.form h4 {
+    text-align: center;
+    font-family: 'Gloria Halleluja', cursive;
+}
+#date {
+    text-align: center;
+    font-family: 'Gloria Halleluja', cursive;
+}
+button {
+    margin-left: 20%;
+    font-family: 'Gloria Halleluja', cursive;
+}
+
+/* for super mobile responsive */
+
+@media only screen and (max-width: 980px) {
+    body {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    body {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    body {
+        width: 100%;
+        height: 100%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
 }

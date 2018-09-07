@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
     <meta charset="utf-8">
@@ -11,43 +12,63 @@
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 
     <title>Let's Taco 'Bout It</title>
+    <div id="connections"></div>
 </head>
 
 <body>
+    <!-- ----------------------------------------------------------------------------------------- -->
+    <!-- HEADER CONTENT WILL BE LOCATED HERE -->
+    <!-- BANNER CONTENT WILL BE LOCATED HERE -->
+            <!-- NEW USERE INPUT WILL BE LOCATED HERE -->
+    <!-- took out jumbotron and login -->
 
     <div class='container'>
         <h1 class='center-align orange-text'><img src='Assets/images/taco couple2.png' alt='' class='responsive-img' style='height:100px'
             /><p id='h1dance' class='orange-text'>Let's Taco 'Bout It</p></h1>
 
         <nav>
-            <div class='nav-wrapper yellow darken-2 center-align'>
-                <ul id='nav-mobile' class='center-align'>
-                    <li><a class='green-text' href='signup.html'>Sign Up</a></li>
+            <div class='nav-wrapper yellow'>
+                <ul id='nav-mobile' class='center'>
+                    <li><a href='signup.html' class='green-text'>Sign Up</a></li>
                 </ul>
             </div>
         </nav>
+        
     </div>
+    
 
     <!-- ----------------------------------------------------------------------------------------- -->
     <!-- SITE CONTENT WILL BE LOCATED HERE -->
     <!-- TOP FEED CONTENT WILL BE LOCATED HERE -->
     <div class="row">
-        <div class="col-xl-2" id="feedArea">
+        <div class="col-xl-3" id="feedArea">
             Top Feed
-
         </div>
 
         <!-- MAIN CONTENT WILL BE LOCATED HERE -->
-        <div class="col-xl-8" id="map">
+        <div class="col-xl-6" id="map">
             map area
         </div>
 
         <!-- LIVE CHAT AND MAP CONTENT WILL BE LOCATED HERE -->
-        <div class="col-xl-2">
-            <div class="row" id="chatArea">live chat area</div>
-
+        <div class="col-xl-3">
+            <div class="row" id="chatArea">Where ya at?</div>
+                <div class='form'>
+                    <h5>Da Cheddar Box</h5>
+                    Name: <input type='text' id='name' /> 
+                    <br> <br>
+                    Date: <input type='date' id='date' /> 
+                    <br> <br>
+                    Comment: <textarea rows='5' col='30' id='bodyText'></textarea><br><br>
+                    <button class="btn green darken-2" type="submit" name="action">
+                        Tell Me!
+                    </button>
+                    <br> <br>
+                        <div id='container'>
+                    </div>
+            </div>
         </div>
-    </div>
+    
 
 
     <!-- ----------------------------------------------------------------------------------------- -->
@@ -63,6 +84,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <script src="assets/javascript/main.js"></script>
+    <script src="assets/javascript/comment.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdm7-qIzpaPhrsOXVe3YLVnQzvT-hpUGI&callback=initMap"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 </body>
