@@ -15,7 +15,7 @@ $(document).ready(function() {
         render(comment[i]);
     }
 
-    $('#addComment').click(function() {
+    $('.btn').click(function() {
         var addObj = {
             "name": $('#name').val(),
             "date": $('#date').val(),
@@ -33,3 +33,6 @@ $(document).ready(function() {
     });
 
 });
+
+// create loop for limiting number of comments
+// create method so that comments does not default after page refresh
