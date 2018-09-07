@@ -40,7 +40,7 @@ $("#newEmailPassLoca").on("click", function (event) {
   // Adds the New Set of Inputs Into Firebase
   database.ref().push(newEntry)
 
-  // Takes you to Maps Page
+  // Takes you to Maps Page after you click on submit button
   window.location.replace("index.html");
 
 });
@@ -62,7 +62,7 @@ function geocode() {
         }
       })
       .then(function (response) {
-
+        console.log(response);
         var formAddress = response.data.results[0].formatted_address;
         var formLat = response.data.results[0].geometry.location.lat;
         var formLng = response.data.results[0].geometry.location.lng;
@@ -102,6 +102,8 @@ function initMap() {
     zoom: 14
   });
   infoWindow = new google.maps.InfoWindow;
+
+  // Will be prompted to ask for user's location
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       var pos = {
@@ -109,7 +111,6 @@ function initMap() {
         lng: position.coords.longitude
       };
 
-      // Will be prompted to ask for user's location
       infoWindow.setPosition(pos);
       infoWindow.setContent("Find people to Taco 'Bout it around you.");
       infoWindow.open(map);
@@ -136,4 +137,3 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 geocode();
 initMap();
 handleLocationError();
-getKeys();
