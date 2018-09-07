@@ -190,4 +190,3 @@ success: function(response){
   });
 }
 }); 
-handleLocationError();
