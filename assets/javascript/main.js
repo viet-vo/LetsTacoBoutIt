@@ -22,6 +22,7 @@ connectedRef.on("value", function (snap) {
 });
 connectionsRef.on("value", function (snap) {
   $("#connected-viewers").text(snap.numChildren());
+  $("#connections").text("Jalape\u00f1o Bizness: " + snap.numChildren() + " people ready to taco 'bout it!");
 });
 
 // Enter inputs into Firebase
@@ -45,7 +46,6 @@ $("#newEmailPassLoca").on("click", function (event) {
   $("#newUserPassword").val("");
   $("#newUserLoca").val("");
 });
-// Google API begins---------------------------------------------------------------------------------------------------------------------------
 // Google Geocode API that Translates Rough Addresses into Well-Formatted Addresses
 // and Latitude and Longitude to use with Google Maps
 function geocode() {
@@ -140,20 +140,9 @@ handleLocationError();
 getKeys();
 console.log(database);
 
+//------------------------------
 
-// YELP API begins------------------------------------------------------------------------------------------------------------------------------
-var config = {
-  apiKey: "AIzaSyB4Ooeb3AO3GUZ0PlheNtyy2jhedAaIuIQ",
-  authDomain: "firstproject-vqv.firebaseapp.com",
-  databaseURL: "https://firstproject-vqv.firebaseio.com",
-  projectId: "firstproject-vqv",
-  storageBucket: "firstproject-vqv.appspot.com",
-  messagingSenderId: "578400054546"
-};
-firebase.initializeApp(config);
-var database = firebase.database();
-var connectionsRef = database.ref("/connections");
-var connectedRef = database.ref(".info/connected");
+
 var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=delis&location=boston";
 $.ajax({
 url: queryURL,
