@@ -39,18 +39,22 @@ $("#newEmailPassLoca").on("click", function (event) {
 
   // Adds the New Set of Inputs Into Firebase
   database.ref().push(newEntry)
-  // Clears the Input Text Field
-  $("#newUserEmail").val("");
-  $("#newUserPassword").val("");
-  $("#newUserLoca").val("");
+
+  // Takes you to Maps Page after you click on submit button
+  window.location.replace("index.html");
+
 });
 
+// Google Geocode API that Translates Rough Addresses into Well-Formatted Addresses
+// and Latitude and Longitude to use with Google Maps
 function geocode() {
   database.ref().on("child_added", function (childSnapshot) {
 
     var userEmail1 = childSnapshot.val().userEmail;
     var location1 = childSnapshot.val().location;
 
+    // Similar to Ajax, Axios Retrieves data from an API
+    // I Chose to Use Axios Instead because Ajax was not working for me
     axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
           address: location1,
@@ -58,11 +62,12 @@ function geocode() {
         }
       })
       .then(function (response) {
-
+        console.log(response);
         var formAddress = response.data.results[0].formatted_address;
         var formLat = response.data.results[0].geometry.location.lat;
         var formLng = response.data.results[0].geometry.location.lng;
 
+        // Create New Markers for Each Child_added and Changed Marker Icon
         marker = new google.maps.Marker({
           position: new google.maps.LatLng(formLat, formLng),
           map: map,
@@ -70,6 +75,7 @@ function geocode() {
           icon: 'assets/images/tacoCouple4.png'
         });
 
+        // Sets Marker on the Map
         google.maps.event.addListener(marker, 'click', (function (marker) {
           infowindow.setContent(formAddress);
           infowindow.open(map, marker);
@@ -82,15 +88,22 @@ function geocode() {
   });
 }
 
+// Initializing the Map
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
+    
+    // Starting Position for Google Maps
     center: {
       lat: 33.6449531,
       lng: -117.8369658
     },
+
+    // Starting Zoom for Google Maps Window
     zoom: 14
   });
   infoWindow = new google.maps.InfoWindow;
+
+  // Will be prompted to ask for user's location
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       var pos = {
@@ -111,6 +124,7 @@ function initMap() {
   }
 }
 
+// Error Handler
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
@@ -119,9 +133,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 };
 
-// 
+// Main Execution
 geocode();
 initMap();
 handleLocationError();
-getKeys();
-console.log(database);
