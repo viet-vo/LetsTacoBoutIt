@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Comments Page</title>
+</head>
+
+<style>
+
+    .form {
+        padding: 10px;
+        border: 1px solid #000;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .form input[type='text'], .form textarea, .form input[type='text'] {
+        border:1px solid #000;
+        padding: 2px;
+        width:300px;
+    }
+    .form h4 {
+        text-align: center;
+    }
+
+
+
+</style>
+
+<body>
+
+    <div class='form'>
+        <h4>Add Comment</h4>
+        Name: <input type='text' id='name' /> 
+        <br> <br>
+        Date: <input type='date' id='date' /> 
+        <br> <br>
+        Body: <textarea rows='5' col='30' id='bodyText'></textarea><br><br>
+        <input type='button' id='addComment' value='Submit'/>
+    </div>
+
+    <div id='container'>
+
+    </div>
+
+
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+crossorigin="anonymous"></script>
+<script src='Assets/javascript/comment.js'></script>
+
+</html>
